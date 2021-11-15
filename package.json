@@ -1,0 +1,42 @@
+{
+  "name": "null-bot",
+  "version": "1.0.0",
+  "description": "null bot for nullcast",
+  "main": "src/app.js",
+  "scripts": {
+    "release": "standard-version",
+    "start": "node src/app.js",
+    "serve-dev": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Planet-NULLCAST/null-bot.git"
+  },
+  "keywords": [
+    "node",
+    "discordjs",
+    "bot"
+  ],
+  "author": "neoito",
+  "license": "MIT",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Planet-NULLCAST/null-bot/issues"
+  },
+  "homepage": "https://github.com/Planet-NULLCAST/null-bot#readme",
+  "dependencies": {
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "discord-api-types": "^0.24.0",
+    "discord.js": "^13.3.1",
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^14.1.0",
+    "@commitlint/config-conventional": "^14.1.0",
+    "eslint": "^8.2.0",
+    "husky": "^7.0.4",
+    "nodemon": "^2.0.15",
+    "prettier": "2.4.1",
+    "standard-version": "^9.3.2"
+  }
+}
