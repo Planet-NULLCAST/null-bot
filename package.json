@@ -6,7 +6,8 @@
   "scripts": {
     "release": "standard-version",
     "start": "node src/app.js",
-    "serve-dev": "nodemon src/app.js"
+    "serve-dev": "nodemon src/app.js dev",
+    "serve-prod": "nodemon src/app.js prod"
   },
   "repository": {
     "type": "git",

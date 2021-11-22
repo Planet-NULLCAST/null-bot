@@ -1,5 +1,9 @@
 import client from './config/discord-config.js'
 import welcomeMsg from './controllers/welcomeMsg.controller.js';
+import envValidity from '../envValidate.js'
+
+// * to validate the minium requiment to run the applications.
+envValidity();
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`)
