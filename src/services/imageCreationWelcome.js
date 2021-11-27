@@ -3,8 +3,6 @@ import Canvas from 'discord-canvas'
 const imageCreationWelcome = async ({message, member}) => {
     try {
 
-        console.log(message);
-
         const welcomeCard = await new Canvas.Welcome()
         .setUsername(message.message.user.username)
         .setBackground('https://static-nullbot.s3.amazonaws.com/Neuromancer.jpg')
