@@ -7,7 +7,8 @@
     "release": "standard-version",
     "start": "node src/app.js",
     "serve-dev": "nodemon src/app.js dev",
-    "serve-prod": "nodemon src/app.js prod"
+    "serve-prod": "nodemon src/app.js prod",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "repository": {
     "type": "git",
@@ -31,13 +32,16 @@
     "discord-api-types": "^0.24.0",
     "discord-canvas": "^1.4.1",
     "discord.js": "^13.3.1",
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "handlebars": "^4.7.7",
+    "nodemailer": "^6.7.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^14.1.0",
     "@commitlint/config-conventional": "^14.1.0",
     "eslint": "^8.2.0",
     "husky": "^7.0.4",
+    "jest": "^27.3.1",
     "nodemon": "^2.0.15",
     "prettier": "2.4.1",
     "standard-version": "^9.3.2"

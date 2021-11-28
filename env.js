@@ -17,8 +17,13 @@ const typeEnv = {
     
 const env = {
     discordBotId : process.env.DISCORD_BOT_ID ? process.env.DISCORD_BOT_ID : '',
-    welcomeChannelID: process.env.DISCORD_BOT_ID ? process.env.WELCOME_CHANNEL_ID : typeEnv.welcomeChannelID,
-    s3StaticUrl:  process.env.DISCORD_BOT_ID ? process.env.S3_STATIC_URL : typeEnv.s3StaticUrl,
+    welcomeChannelID: process.env.WELCOME_CHANNEL_ID ? process.env.WELCOME_CHANNEL_ID : typeEnv.welcomeChannelID,
+    s3StaticUrl:  process.env.S3_STATIC_URL ? process.env.S3_STATIC_URL : typeEnv.s3StaticUrl,
+    emailID : {
+        userName: process.env.EMAIL_USERNAME,
+        password: process.env.EMAIL_PASSWORD,
+        devEmailId: process.env.DEV_EMAIL_ID ? process.env.DEV_EMAIL_ID : process.env.EMAIL_USERNAME 
+    } 
 };
 
 export default env;
