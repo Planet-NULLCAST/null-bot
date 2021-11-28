@@ -1,5 +1,7 @@
 import client from './config/discord-config.js'
+
 import welcomeMsg from './controllers/welcomeMsg.controller.js';
+import regulationsDm from './controllers/regulationsDm.controller.js';
 import envValidity from '../envValidate.js'
 import errorHandlerEmail from './services/errorHandlerEmail.js';
 
@@ -12,6 +14,7 @@ client.on('ready', () => {
 
 client.on("guildMemberAdd" ,(message, member) => {
   welcomeMsg({message: message});
+  regulationsDm({message: message});
 });
 
 
