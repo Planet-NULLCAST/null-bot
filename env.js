@@ -13,6 +13,7 @@ if (developmentType === 'dev') isProdType = false;
 const typeEnv = {
     welcomeChannelID : isProdType ? prod.welcomeChannel : dev.welcomeChannel,
     s3StaticUrl : isProdType ? prod.s3StaticURL : dev.s3StaticURL,
+    emailLimit: isProdType ? prod.emailLimit : dev.emailLimit
 }
     
 const env = {
@@ -22,7 +23,8 @@ const env = {
     emailID : {
         userName: process.env.EMAIL_USERNAME,
         password: process.env.EMAIL_PASSWORD,
-        devEmailId: process.env.DEV_EMAIL_ID ? process.env.DEV_EMAIL_ID : process.env.EMAIL_USERNAME 
+        devEmailId: process.env.DEV_EMAIL_ID ? process.env.DEV_EMAIL_ID : process.env.EMAIL_USERNAME,
+        emailLimit: process.env.EMAIL_LIMIT ? process.env.EMAIL_LIMIT : typeEnv.emailLimit
     } 
 };
 
