@@ -25,7 +25,8 @@ const env = {
         password: process.env.EMAIL_PASSWORD,
         devEmailId: process.env.DEV_EMAIL_ID ? process.env.DEV_EMAIL_ID : process.env.EMAIL_USERNAME,
         emailLimit: process.env.EMAIL_LIMIT ? process.env.EMAIL_LIMIT : typeEnv.emailLimit
-    } 
+    },
+    serverID: process.env.SERVER_ID
 };
 
 export default env;

@@ -7,7 +7,7 @@ const imageCreationWelcome = async ({message, member}) => {
         const canvas = Canvas.createCanvas(640, 320);
 		const context = canvas.getContext('2d');
         // the backgroud image
-        const imageAssetsFilePath = fileDirFromRoot('./src/assets/images/Welcome_post.png');
+        const imageAssetsFilePath = fileDirFromRoot('./assets/images/Welcome_post.png');
         const background = await Canvas.loadImage(imageAssetsFilePath);
         context.drawImage(background, 0, 0, canvas.width, canvas.height);
 

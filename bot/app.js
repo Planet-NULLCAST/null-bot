@@ -4,6 +4,8 @@ import welcomeMsg from './controllers/welcomeMsg.controller.js'
 import regulationsDm from './controllers/regulationsDm.controller.js'
 import envValidity from '../envValidate.js'
 import errorHandlerEmail from './services/errorHandlerEmail.js'
+import commands from './config/serverCommandsConfig.js'
+import commandsController from './controllers/commands.controller.js'
 
 const discordBot = () => {
     // * to validate the minium requiment to run the applications.
@@ -11,11 +13,20 @@ const discordBot = () => {
 
     client.on('ready', () => {
         console.log(`Logged in as ${client.user.tag}!`)
+
+        commands(client);
     })
 
     client.on('guildMemberAdd', (message, member) => {
         welcomeMsg({ message: message })
         regulationsDm({ message: message })
+    })
+
+    client.on('interactionCreate', async (interaction) => {
+        if (!interaction.isCommand()) return
+
+        commandsController(interaction);
+
     })
 
     // ! error handler for our bot.
@@ -46,6 +57,8 @@ const discordBot = () => {
             handlerName: 'node uncaughtException error',
         })
     })
+
+
 }
 
 export default discordBot

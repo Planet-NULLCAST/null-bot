@@ -21,6 +21,9 @@ const envValidity = () => {
         throw new Error('Please provide the EMAIL_PASSWORD on your .env'); 
     }
 
+    if (!process.env.SERVER_ID) {
+        throw new Error('Please provide the SERVER_ID on your .env'); 
+    }
 
 }
 

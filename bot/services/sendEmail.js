@@ -1,5 +1,5 @@
 import env from '../../env.js'
-import transporter from '../config/emailConfig.js'
+import transporter from '../../config/emailConfig.js'
 
 const sendEmail = async ({ to, subject, text, html }) => {
     try {
