@@ -1,5 +1,6 @@
 import env from '../../env.js';
 import botCommands from '../commands/index.js'
+import permissonLevel from '../functions/permisonLevel.js';
 
 const commands = async (client) => {
 
@@ -28,26 +29,22 @@ const commands = async (client) => {
     // commands permission are setup
     let commandsList = await guild.commands.fetch();
     await commandsList.forEach(slashCommand => {
-        console.log(`Changing command ${slashCommand.name}`);
 
         for (let index = 0; index < botCommands.length; index++) {
 
             if (botCommands[index].name === slashCommand.name) {
 
-                console.log(botCommands[index].name, botCommands[index], slashCommand.id);
+                const botCommandPermissonList  = permissonLevel(botCommands[index].permissions);
 
                 guild.commands.permissions.add({
                     command: slashCommand.id,
-                    permissions: botCommands[index].permissions
+                    permissions: botCommandPermissonList
                 });
-
             }
-
         }
-        
     });
 
-    console.log(`Loaded all the commands  to server ${guildId}`);
+    console.log(`Loaded all the commands  to server ${guild}`);
 
     return commands;
 
