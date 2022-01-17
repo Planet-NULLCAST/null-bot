@@ -11,3 +11,5 @@ WEBHOOK_TOKEN=<WEBHOOKS TOKEN>
 This token will be send on every webhook from this bot the header as key **Bot-Token**.
 
 ## Webhooks list
+
+[maintance webhooks](https://github.com/Planet-NULLCAST/null-bot/blob/dev/doc/webhooks/MAINTANCE_WEBHOOKS.md)
