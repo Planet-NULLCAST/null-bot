@@ -6,6 +6,7 @@ import envValidity from '../envValidate.js'
 import errorHandlerEmail from './services/errorHandlerEmail.js'
 import commands from './config/serverCommandsConfig.js'
 import commandsController from './controllers/commands.controller.js'
+import defaultRoleAssign from './controllers/defaultRoleAssign.controller.js'
 
 const discordBot = () => {
     // * to validate the minium requiment to run the applications.
@@ -20,6 +21,7 @@ const discordBot = () => {
     client.on('guildMemberAdd', (message, member) => {
         welcomeMsg({ message: message })
         regulationsDm({ message: message })
+        defaultRoleAssign(message)
     })
 
     client.on('interactionCreate', async (interaction) => {
