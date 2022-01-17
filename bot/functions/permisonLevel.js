@@ -15,6 +15,17 @@ const permissonLevel = (commandPermssion) => {
                  
              }
             
+         }else{
+
+            if (roles[index].id) {
+                permissionList.push({
+                    id: roles[index].id,
+                    type: 'ROLE',
+                    permission: true,
+                })
+                 
+             }
+
          }
         
     }

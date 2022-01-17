@@ -14,6 +14,9 @@ const commands = async (client) => {
         commands = client.application?.commands;
     }
 
+    // clearing the old commands to avoid old commands to not stay.
+    commands.set([]);
+
     console.log(`Loadinging all the commands  to server ${guild}`);
 
     //  commands are setup

@@ -12,6 +12,7 @@
 
 import maintainanceBreakDone from "./maintanceBreakDone.js"
 import maintainanceBreak from "./maintenaceBreak.js"
+import migrateUserTag from './migrateUsertag.js'
 
 // PERMISON DATA
 
@@ -53,6 +54,16 @@ const botCommands = [
         },
         options: []
 
+    },
+    {
+        name: 'migrate_user_tag',
+        description: 'Migrate current user to have default tag.',
+        run: migrateUserTag,
+        permissions : {
+            type: 'ROLE_LEVEL',
+            level: 2
+        },
+        options: []
     }
 ]
 
