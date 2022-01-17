@@ -13,7 +13,7 @@ if (developmentType === 'dev') isProdType = false;
 const typeEnv = {
     welcomeChannelID : isProdType ? prod.welcomeChannel : dev.welcomeChannel,
     s3StaticUrl : isProdType ? prod.s3StaticURL : dev.s3StaticURL,
-    emailLimit: isProdType ? prod.emailLimit : dev.emailLimit
+    emailLimit: isProdType ? prod.emailLimit : dev.emailLimit,
 }
     
 const env = {
@@ -26,7 +26,11 @@ const env = {
         devEmailId: process.env.DEV_EMAIL_ID ? process.env.DEV_EMAIL_ID : process.env.EMAIL_USERNAME,
         emailLimit: process.env.EMAIL_LIMIT ? process.env.EMAIL_LIMIT : typeEnv.emailLimit
     },
-    serverID: process.env.SERVER_ID
+    serverID: process.env.SERVER_ID,
+    webhooks : {
+        webhooksEndpoints: process.env.WEBHOOKS,
+        webhooksToken: process.env.WEBHOOK_TOKEN,
+    }
 };
 
 export default env;

@@ -10,8 +10,10 @@
 //}
 // for more abbout the discord bot https://discordjs.guide/interactions/slash-command-permissions.html#user-permissions
 
-// PERMISON DATA
+import maintainanceBreakDone from "./maintanceBreakDone.js"
+import maintainanceBreak from "./maintenaceBreak.js"
 
+// PERMISON DATA
 
 const botCommands = [
 
@@ -30,6 +32,28 @@ const botCommands = [
         },
         options: []
     },
+    {
+        name: 'maintenance_break',
+        description: 'Notify the maintainance break of the bot.',
+        run: maintainanceBreak,
+        permissions : {
+            type: 'ROLE_LEVEL',
+            level: 2
+        },
+        options: []
+
+    },
+    {
+        name: 'maintenance_done',
+        description: 'Notify the maintainance break of the bot is finished.',
+        run: maintainanceBreakDone,
+        permissions : {
+            type: 'ROLE_LEVEL',
+            level: 2
+        },
+        options: []
+
+    }
 ]
 
 export default botCommands
