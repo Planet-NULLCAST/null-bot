@@ -26,8 +26,7 @@ const createpoll = async (interaction) => {
         b !== null &&  message.react('2️⃣');
         c !== null &&  message.react('3️⃣');
         d !== null &&  message.react('4️⃣');
-        e !== null &&  message.react('5️⃣');
-        
+        e !== null &&  message.react('5️⃣'); 
     })
 
    
