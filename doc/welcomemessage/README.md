@@ -19,3 +19,9 @@ sudo apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev l
 ![instruction](https://github.com/Planet-NULLCAST/null-bot/blob/dev/doc/Screenshot%202021-11-21%20at%206.32.28%20PM.png)
 
 To make bot work on the welcome message you need to activate the gateway intent.
+
+## Welcome image
+
+If you want to change the welcome canvase image go to *assets/images/Welcome_post.png* dir.
+
+We recommend you to add 640 × 320px image. To change the font and space you can go to *bot/ervices/imageCreationWelcomejs* dir.
