@@ -13,6 +13,8 @@
 import maintainanceBreakDone from "./maintanceBreakDone.js"
 import maintainanceBreak from "./maintenaceBreak.js"
 import migrateUserTag from './migrateUsertag.js'
+import voiceRecord from "./voiceRecord.js"
+import voiceRecordFinish from "./voiceRecordingFinish.js"
 
 // PERMISON DATA
 
@@ -21,13 +23,13 @@ const botCommands = [
     {
         name: 'ping',
         description: 'Ping the bot to check its alive',
-        run: (interaction) => { 
+        run: (interaction) => {
             interaction.reply({
-            content: 'Bot is up and running',
-            ephemeral: true
+                content: 'Bot is up and running',
+                ephemeral: true
             })
         },
-        permissions : {
+        permissions: {
             type: 'ROLE_LEVEL',
             level: 2
         },
@@ -37,7 +39,7 @@ const botCommands = [
         name: 'maintenance_break',
         description: 'Notify the maintainance break of the bot.',
         run: maintainanceBreak,
-        permissions : {
+        permissions: {
             type: 'ROLE_LEVEL',
             level: 2
         },
@@ -48,7 +50,7 @@ const botCommands = [
         name: 'maintenance_done',
         description: 'Notify the maintainance break of the bot is finished.',
         run: maintainanceBreakDone,
-        permissions : {
+        permissions: {
             type: 'ROLE_LEVEL',
             level: 2
         },
@@ -59,11 +61,37 @@ const botCommands = [
         name: 'migrate_user_tag',
         description: 'Migrate current user to have default tag.',
         run: migrateUserTag,
-        permissions : {
+        permissions: {
             type: 'ROLE_LEVEL',
             level: 2
         },
         options: []
+    },
+    {
+        name: 'voice_record_start',
+        description: 'Voice recording from voice channel.',
+        run: voiceRecord,
+        permissions: {
+            type: 'ROLE_LEVEL',
+            level: 2
+        },
+        options: [
+            {
+                name: 'voice_channel_name',
+                description: 'Enter the voice channel.',
+                required: true,
+                type: 7,
+            }
+        ],
+    },
+    {
+        name: 'voice_record_finish',
+        description: 'Stop voice recording from voice channel.',
+        run: voiceRecordFinish,
+        permissions: {
+            type: 'ROLE_LEVEL',
+            level: 2
+        },
     }
 ]
 
