@@ -26,9 +26,7 @@ const discordBot = () => {
 
     client.on('interactionCreate', async (interaction) => {
         if (!interaction.isCommand()) return
-
         commandsController(interaction);
-
     })
 
     // ! error handler for our bot.

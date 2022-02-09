@@ -81,6 +81,12 @@ const botCommands = [
                 description: 'Enter the voice channel.',
                 required: true,
                 type: 7,
+            },
+            {
+                name: 'user_name',
+                description: 'Record the voice of this spefic user.',
+                required: false,
+                type: 6,
             }
         ],
     },
