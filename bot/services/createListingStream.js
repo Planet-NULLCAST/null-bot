@@ -1,61 +1,129 @@
 import { EndBehaviorType, VoiceReceiver } from '@discordjs/voice';
 import { User } from 'discord.js';
-import { createWriteStream } from 'node:fs';
+import { createWriteStream, writeFileSync } from 'node:fs';
 import prism from 'prism-media';
-import { pipeline } from 'node:stream';
+import { pipeline, Transform } from 'node:stream';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import EventEmitter from 'events';
 import botEvents from '../config/events.js';
 
 
+class ListingStream {
 
-function getDisplayName(userId, user) {
-	return user ? `${user.username}_${user.discriminator}` : userId;
-}
+	getDisplayName(userId, user) {
+		return user ? `${user.username}_${user.discriminator}` : userId;
+	}
+	
+	createListeningStream(receiver, userId, user) {
 
-export function createListeningStream(receiver, userId, user) {
-	const opusStream = receiver.subscribe(userId, {
-		end: {
-			behavior: EndBehaviorType.Manual,
-			duration: 500000,
-		},
-	});
+		try {
 
-	botEvents.on('close_recording', () => {
-		 opusStream.emit('end');
-		 opusStream.emit('close')
-		//  opusStream.destroy();
-		console.log('recording');
-	})
+			const SILENCE_FRAME = Buffer.from([0xf8, 0xff, 0xfe]);
 
-	const oggStream = new prism.opus.OggLogicalBitstream({
-		opusHead: new prism.opus.OpusHead({
-			channelCount: 2,
-			sampleRate: 48000,
-		}),
-		pageSizeControl: {
-			maxPackets: 10,
+			const opusStream = receiver.subscribe(userId, {
+				end: {
+					behavior: EndBehaviorType.Manual,
+					duration: 500000,
+				},
+			});
+		 
+			let intervalData;
+		
+			opusStream.on('data', (data) => {
+			
+				const buf = Buffer.from(data, 'base64');
+		
+				if (buf.length <= 4) {
+		
+					if (!intervalData) {
+						intervalData = setInterval(() => {
+		
+							console.log('intervel');
+							opusStream.push(SILENCE_FRAME)
+			
+						}, 10);
+					}
+					
+				}else{
+		
+						console.log('clear');
+						clearInterval(intervalData)
+						intervalData = undefined
+				}
+		
+			})
+		
+			botEvents.on('close_recording', () => {
+				opusStream.emit('end');
+				opusStream.emit('close')
+			
+					clearInterval(intervalData)
+				
+				//  opusStream.destroy();
+				console.log('recording');
+			})
+		
+			const oggStream = new prism.opus.OggLogicalBitstream({
+				opusHead: new prism.opus.OpusHead({
+					channelCount: 2,
+					sampleRate: 48000,
+				}),
+				pageSizeControl: {
+					maxPackets: 10,
+		
+				},
+			});
+		
+			const __filename = fileURLToPath(import.meta.url);
+			const __dirname = dirname(__filename);
+		
+			const fileName = this.getDisplayName(userId, user)
+		
+			const filename = `/recordings/${fileName}.ogg`;
+		
+			writeFileSync(__dirname + filename, '', (err, file) => { console.log('error', err);})
+		
+			const out = createWriteStream(__dirname + filename);
+		
+			console.log(`👂 Started recording ${filename}`);
+		
+			pipeline(opusStream, oggStream, out, (err) => {
+				if (err) {
+					console.warn(`❌ Error recording file ${filename} - ${err.message}`);
+				} else {
+					console.log(`✅ Recorded ${filename}`);
+				}
+			})
 
-		},
-	});
+		} catch (error) {
 
-	const __filename = fileURLToPath(import.meta.url);
-	const __dirname = dirname(__filename);
+			botEvents.emit('close_recording')
+			botEvents.off();
 
-	console.log(__dirname);
+			throw error;
+			
+		}
 
-	const filename = `/recordings/fa.ogg`;
 
-	const out = createWriteStream(__dirname + filename,);
-
-	console.log(`👂 Started recording ${filename}`);
-
-	pipeline(opusStream, oggStream, out, (err) => {
-		if (err) {
-			console.warn(`❌ Error recording file ${filename} - ${err.message}`);
-		} else {
-			console.log(`✅ Recorded ${filename}`);
+	}
+	
+	myTransform = new Transform({
+	
+		transform(chunk, encoding, callback) {
+	
+			// console.log(`transform + ${encoding}`, chunk);
+	
+			const buf = Buffer.from(chunk, 'base64');
+	
+			// if (buf) {
+			// 	console.log('empty');
+			// }
+	
+			// Push the data onto the readable queue.
+			callback(null, chunk);
 		}
 	});
+
 }
+export default ListingStream;
