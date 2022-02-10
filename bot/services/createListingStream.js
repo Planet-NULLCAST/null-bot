@@ -39,7 +39,7 @@ class ListingStream {
 					if (!intervalData) {
 						intervalData = setInterval(() => {
 		
-							console.log('intervel');
+					
 							opusStream.push(SILENCE_FRAME)
 			
 						}, 10);
@@ -47,7 +47,7 @@ class ListingStream {
 					
 				}else{
 		
-						console.log('clear');
+						
 						clearInterval(intervalData)
 						intervalData = undefined
 				}
@@ -61,7 +61,6 @@ class ListingStream {
 					clearInterval(intervalData)
 				
 				//  opusStream.destroy();
-				console.log('recording');
 			})
 		
 			const oggStream = new prism.opus.OggLogicalBitstream({

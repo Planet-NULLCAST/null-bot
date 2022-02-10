@@ -13,7 +13,7 @@ const voiceRecord = async (interaction) => {
     const { options } = interaction;
 
     const voiceChannelId = options._hoistedOptions[0].channel.id;
-    const userGetId = options._hoistedOptions[1].user.id;
+    const userGetId = options._hoistedOptions[1]?.user?.id;
 
     const connection = joinVoiceChannel({
         channelId: voiceChannelId,
