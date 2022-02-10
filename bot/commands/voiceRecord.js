@@ -32,7 +32,7 @@ const voiceRecord = async (interaction) => {
         if (userGetId) {
 
             interaction.followUp({
-                content: `Audio recording started and listening to ${options._hoistedOptions[1].user.name}`,
+                content: `Audio recording started and listening to ${options._hoistedOptions[1].user.username}`,
                 ephemeral: true
             });
 
