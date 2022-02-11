@@ -38,8 +38,6 @@ class ListingStream {
 		
 					if (!intervalData) {
 						intervalData = setInterval(() => {
-		
-					
 							opusStream.push(SILENCE_FRAME)
 			
 						}, 10);

@@ -120,3 +120,8 @@ dist
 
 # audio file
 *.ogg
+*.opus
+
+.clinic/
+
+.DS_Store

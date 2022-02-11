@@ -8,7 +8,7 @@ import commands from './config/serverCommandsConfig.js'
 import commandsController from './controllers/commands.controller.js'
 import defaultRoleAssign from './controllers/defaultRoleAssign.controller.js'
 
-const discordBot = () => {
+const discordBot = async () => {
     // * to validate the minium requiment to run the applications.
     envValidity()
 

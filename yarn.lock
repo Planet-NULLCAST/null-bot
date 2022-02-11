@@ -464,17 +464,6 @@
     "http-response-object" "^3.0.1"
     "parse-cache-control" "^1.0.1"
 
-"@discordjs/builders@^0.11.0":
-  "integrity" "sha512-ZTB8yJdJKrKlq44dpWkNUrAtEJEq0gqpb7ASdv4vmq6/mZal5kOv312hQ56I/vxwMre+VIkoHquNUAfnTbiYtg=="
-  "resolved" "https://registry.npmjs.org/@discordjs/builders/-/builders-0.11.0.tgz"
-  "version" "0.11.0"
-  dependencies:
-    "@sindresorhus/is" "^4.2.0"
-    "discord-api-types" "^0.26.0"
-    "ts-mixer" "^6.0.0"
-    "tslib" "^2.3.1"
-    "zod" "^3.11.6"
-
 "@discordjs/builders@^0.8.1":
   "integrity" "sha512-/YRd11SrcluqXkKppq/FAVzLIPRVlIVmc6X8ZklspzMIHDtJ+A4W37D43SHvLdH//+NnK+SHW/WeOF4Ts54PeQ=="
   "resolved" "https://registry.npmjs.org/@discordjs/builders/-/builders-0.8.2.tgz"
@@ -485,6 +474,17 @@
     "ow" "^0.27.0"
     "ts-mixer" "^6.0.0"
     "tslib" "^2.3.1"
+
+"@discordjs/builders@0.11.0":
+  "integrity" "sha512-ZTB8yJdJKrKlq44dpWkNUrAtEJEq0gqpb7ASdv4vmq6/mZal5kOv312hQ56I/vxwMre+VIkoHquNUAfnTbiYtg=="
+  "resolved" "https://registry.npmjs.org/@discordjs/builders/-/builders-0.11.0.tgz"
+  "version" "0.11.0"
+  dependencies:
+    "@sindresorhus/is" "^4.2.0"
+    "discord-api-types" "^0.26.0"
+    "ts-mixer" "^6.0.0"
+    "tslib" "^2.3.1"
+    "zod" "^3.11.6"
 
 "@discordjs/collection@^0.1.6":
   "integrity" "sha512-utRNxnd9kSS2qhyivo9lMlt5qgAUasH2gb7BEOn6p0efFh24gjGomHzWKMAPn2hEReOPQZCJaRKoURwRotKucQ=="
@@ -520,7 +520,7 @@
     "semver" "^7.3.5"
     "tar" "^6.1.11"
 
-"@discordjs/opus@^0.5.0", "@discordjs/opus@^0.5.3":
+"@discordjs/opus@^0.5.0", "@discordjs/opus@0.5.3":
   "integrity" "sha512-IQhCwCy2WKXLe+qkOkwO1Wjgk20uqeAbqM62tCbzIqbTsXX4YAge8Me9RFnI77Lx+UTkgm4rSVM3VPVdS/GsUw=="
   "resolved" "https://registry.npmjs.org/@discordjs/opus/-/opus-0.5.3.tgz"
   "version" "0.5.3"
@@ -528,7 +528,7 @@
     "@discordjs/node-pre-gyp" "^0.4.0"
     "node-addon-api" "^3.2.1"
 
-"@discordjs/rest@^0.1.0-canary.0":
+"@discordjs/rest@0.1.0-canary.0":
   "integrity" "sha512-d+s//ISYVV+e0w/926wMEeO7vju+Pn11x1JM4tcmVMCHSDgpi6pnFCNAXF1TEdnDcy7xf9tq5cf2pQkb/7ySTQ=="
   "resolved" "https://registry.npmjs.org/@discordjs/rest/-/rest-0.1.0-canary.0.tgz"
   "version" "0.1.0-canary.0"
@@ -542,7 +542,7 @@
     "node-fetch" "^2.6.1"
     "tslib" "^2.3.0"
 
-"@discordjs/voice@^0.7.5":
+"@discordjs/voice@0.7.5":
   "integrity" "sha512-lUk+CmIXNKslT6DkC9IF9rpsqhzlTiedauUCPBzepjd4XWxwBZiyVIzR6QpbAirxkAwCoAbbje+3Ho71PGLEAw=="
   "resolved" "https://registry.npmjs.org/@discordjs/voice/-/voice-0.7.5.tgz"
   "version" "0.7.5"
@@ -553,6 +553,11 @@
     "tiny-typed-emitter" "^2.1.0"
     "tslib" "^2.3.1"
     "ws" "^8.2.3"
+
+"@drippy-music/opus-stream-decoder@^1.3.1":
+  "integrity" "sha512-0wyy1d7H2XOm0+g2aBaWYx089oxfM/qJyTP1N88/1m0LzWa8CNDmZofiDmHyFf6RRhY3+QRF8U9K2Br6NHX7tg=="
+  "resolved" "https://registry.npmjs.org/@drippy-music/opus-stream-decoder/-/opus-stream-decoder-1.3.1.tgz"
+  "version" "1.3.1"
 
 "@endemolshinegroup/cosmiconfig-typescript-loader@^3.0.2":
   "integrity" "sha512-QRVtqJuS1mcT56oHpVegkKBlgtWjXw/gHNWO3eL9oyB5Sc7HBoc2OLG/nYpVfT/Jejvo3NUrD0Udk7XgoyDKkA=="
@@ -1181,11 +1186,6 @@
   "integrity" "sha1-x57Zf380y48robyXkLzDZkdLS3k="
   "resolved" "https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz"
   "version" "0.4.0"
-
-"audio-context@^1.0.3":
-  "integrity" "sha512-RH3/rM74f2ITlohhjgC7oYZVS97wtv/SEjXLCzEinnrIPIDxc39m2aFc6wmdkM0NYRKo1DMleYPMAIbnTRW0eA=="
-  "resolved" "https://registry.npmjs.org/audio-context/-/audio-context-1.0.3.tgz"
-  "version" "1.0.3"
 
 "axios@^0.24.0":
   "integrity" "sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA=="
