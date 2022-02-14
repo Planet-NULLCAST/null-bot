@@ -54,7 +54,8 @@ const voiceRecord = async (interaction) => {
     
                     userTalk[userId]['classObj'] = new ListingStream();
     
-                    userTalk[userId]['classObj'].createListeningStream(receiver, userId, client.users.cache.get(userId))
+                    userTalk[userId]['classObj'].createListeningStream(receiver, userId, client.users.cache.get(userId),
+                     (userIdEel) => { userTalk[userIdEel] = undefined; })
                    
                 }
                 

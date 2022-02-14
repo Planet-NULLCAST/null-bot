@@ -1,12 +1,9 @@
-import { EndBehaviorType, VoiceReceiver } from '@discordjs/voice';
-import { User } from 'discord.js';
-import { createWriteStream, writeFileSync } from 'node:fs';
+import { EndBehaviorType } from '@discordjs/voice';
+import { createWriteStream, writeFileSync, rename } from 'node:fs';
 import prism from 'prism-media';
 import { pipeline, Transform } from 'node:stream';
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import EventEmitter from 'events';
-import botEvents from '../config/events.js';
+import { dirname , join} from 'path';
 
 
 class ListingStream {
@@ -15,7 +12,7 @@ class ListingStream {
 		return user ? `${user.username}_${user.discriminator}` : userId;
 	}
 	
-	createListeningStream(receiver, userId, user) {
+	createListeningStream(receiver, userId, user, onCloseFunction) {
 
 		try {
 
@@ -23,43 +20,11 @@ class ListingStream {
 
 			const opusStream = receiver.subscribe(userId, {
 				end: {
-					behavior: EndBehaviorType.Manual,
-					duration: 500000,
+					behavior: EndBehaviorType.AfterSilence,
+					duration: 100,
 				},
 			});
-		 
-			let intervalData;
-		
-			opusStream.on('data', (data) => {
-			
-				const buf = Buffer.from(data, 'base64');
-		
-				if (buf.length <= 4) {
-		
-					if (!intervalData) {
-						intervalData = setInterval(() => {
-							opusStream.push(SILENCE_FRAME)
-			
-						}, 10);
-					}
-					
-				}else{
-		
-						
-						clearInterval(intervalData)
-						intervalData = undefined
-				}
-		
-			})
-		
-			botEvents.on('close_recording', () => {
-				opusStream.emit('end');
-				opusStream.emit('close')
-			
-					clearInterval(intervalData)
-				
-				//  opusStream.destroy();
-			})
+	
 		
 			const oggStream = new prism.opus.OggLogicalBitstream({
 				opusHead: new prism.opus.OpusHead({
@@ -68,40 +33,75 @@ class ListingStream {
 				}),
 				pageSizeControl: {
 					maxPackets: 10,
-		
 				},
 			});
-		
+
 			const __filename = fileURLToPath(import.meta.url);
 			const __dirname = dirname(__filename);
+
+			const  filePath = this.filePathCreation(userId, user)
 		
-			const fileName = this.getDisplayName(userId, user)
+			writeFileSync(filePath, '', (err, file) => { console.log('error', err);})
 		
-			const filename = `/recordings/${fileName}.ogg`;
+			const out = createWriteStream(filePath);
 		
-			writeFileSync(__dirname + filename, '', (err, file) => { console.log('error', err);})
-		
-			const out = createWriteStream(__dirname + filename);
-		
-			console.log(`👂 Started recording ${filename}`);
+			console.log(`👂 Started recording ${filePath}`);
+
+			opusStream.on('close', () => {
+
+				onCloseFunction(userId)
+
+				setTimeout(() => {
+
+					this.fileRenamed(filePath)
+					
+				}, 100);
+
+			})
 		
 			pipeline(opusStream, oggStream, out, (err) => {
 				if (err) {
-					console.warn(`❌ Error recording file ${filename} - ${err.message}`);
+					console.warn(`❌ Error recording file ${filePath} - ${err.message}`);
 				} else {
-					console.log(`✅ Recorded ${filename}`);
+					console.log(`✅ Recorded ${filePath}`);
 				}
 			})
-
+			
 		} catch (error) {
-
-			botEvents.emit('close_recording')
-			botEvents.off();
 
 			throw error;
 			
 		}
 
+	}
+
+	filePathCreation = (userId, user) => {
+
+		const __filename = fileURLToPath(import.meta.url);
+		const __dirname = dirname(__filename);
+
+		const fileName = this.getDisplayName(userId, user)
+		const startingdate = new Date()
+
+		const filename = `/recordings/${fileName}-${startingdate.getHours()}_${startingdate.getMinutes()}_${startingdate.getSeconds()}_${startingdate.getMilliseconds()}.ogg`;
+		const filePath  = join(__dirname, filename)
+
+		return filePath
+
+	}
+
+	fileRenamed = (fileName) => {
+
+		const __filename = fileURLToPath(import.meta.url);
+		const __dirname = dirname(__filename);
+
+		const endingDate = new Date()
+		let updateFileName = fileName.split('.')[0];
+		updateFileName = `${updateFileName}-${endingDate.getHours()}_${endingDate.getMinutes()}_${endingDate.getSeconds()}_${endingDate.getMilliseconds()}.ogg`;
+
+		console.log(updateFileName);
+
+		rename(fileName, updateFileName, (err) => { console.log('err', err);})
 
 	}
 	
