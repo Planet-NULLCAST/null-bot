@@ -8,14 +8,14 @@ import commands from './config/serverCommandsConfig.js'
 import commandsController from './controllers/commands.controller.js'
 import defaultRoleAssign from './controllers/defaultRoleAssign.controller.js'
 
-const discordBot = () => {
+const discordBot = async () => {
     // * to validate the minium requiment to run the applications.
     envValidity()
 
     client.on('ready', () => {
         console.log(`Logged in as ${client.user.tag}!`)
 
-        commands(client);
+        // commands(client);
     })
 
     client.on('guildMemberAdd', (message, member) => {
@@ -26,9 +26,7 @@ const discordBot = () => {
 
     client.on('interactionCreate', async (interaction) => {
         if (!interaction.isCommand()) return
-
         commandsController(interaction);
-
     })
 
     // ! error handler for our bot.

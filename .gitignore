@@ -116,3 +116,12 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+
+# audio file
+*.ogg
+*.opus
+
+.clinic/
+
+.DS_Store

@@ -14,6 +14,8 @@ import createpoll, {polloptions} from "./createpoll.js"
 import maintainanceBreakDone from "./maintanceBreakDone.js"
 import maintainanceBreak from "./maintenaceBreak.js"
 import migrateUserTag from './migrateUsertag.js'
+import voiceRecord from "./voiceRecord.js"
+import voiceRecordFinish from "./voiceRecordingFinish.js"
 
 // PERMISON DATA
 
@@ -70,12 +72,37 @@ const botCommands = [
         name: 'poll',
         description: 'Create a poll',
         run: createpoll,
+        name: 'voice_record_start',
+        description: 'Voice recording from voice channel.',
+        run: voiceRecord,
         permissions: {
             type: 'ROLE_LEVEL',
             level: 2
         },
-        options: polloptions
+        options: [
+            {
+                name: 'voice_channel_name',
+                description: 'Enter the voice channel.',
+                required: true,
+                type: 7,
+            },
+            {
+                name: 'user_name',
+                description: 'Record the voice of this spefic user.',
+                required: false,
+                type: 6,
+            }
+        ],
     },
+    {
+        name: 'voice_record_finish',
+        description: 'Stop voice recording from voice channel.',
+        run: voiceRecordFinish,
+        permissions: {
+            type: 'ROLE_LEVEL',
+            level: 2
+        },
+    }
 ]
 
 export default botCommands

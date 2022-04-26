@@ -11,10 +11,9 @@ FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:0-${VARIANT}
 # install the dependecies for the canvas
 RUN apt-get update && apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev --yes
 
+# for discord voice
+RUN sudo apt-get install -y libsodium-dev
 
-# [Optional] Uncomment if you want to install an additional version of node using nvm
-# ARG EXTRA_NODE_VERSION=10
-# RUN su node -c "source /usr/local/share/nvm/nvm.sh && nvm install ${EXTRA_NODE_VERSION}"
-
-# [Optional] Uncomment if you want to install more global node modules
-# RUN su node -c "npm install -g <your-package-list-here>"
+# rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+RUN echo 'source $HOME/.cargo/env' >> $HOME/.bashrc
