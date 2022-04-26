@@ -10,6 +10,7 @@
 //}
 // for more abbout the discord bot https://discordjs.guide/interactions/slash-command-permissions.html#user-permissions
 
+import createpoll, {polloptions} from "./createpoll.js"
 import maintainanceBreakDone from "./maintanceBreakDone.js"
 import maintainanceBreak from "./maintenaceBreak.js"
 import migrateUserTag from './migrateUsertag.js'
@@ -68,6 +69,9 @@ const botCommands = [
         options: []
     },
     {
+        name: 'poll',
+        description: 'Create a poll',
+        run: createpoll,
         name: 'voice_record_start',
         description: 'Voice recording from voice channel.',
         run: voiceRecord,
